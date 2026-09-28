@@ -29,6 +29,67 @@ namespace OOP_03
             //*No. Because the primary purpose of the ⁠sealed⁠ keyword on a method is to explicitly block and prevent further overriding in child classes.
 
             #endregion
+            #region Part 02 — Practical
+
+            //a.Create a Driver
+            // a. Create a Driver
+            Driveer driver = new Driveer("D-101", "Ahmed Ali", "01012345678");
+
+            // b. Create a DeliveryCenter
+            DeliveryCenter center = new DeliveryCenter( "Cairo Main Hub");
+
+            // c. Assign the Driver to the DeliveryCenter
+            center.AssignedDriver = driver;
+
+            // d. Create one StandardShipment
+            DeliveryAddress addr1 = new DeliveryAddress();
+            StandardShipment stdShipment = new StandardShipment("SH-001", "Electronics", 2.5, 50m, addr1);
+
+            // e. Create one ExpressShipment
+            DeliveryAddress addr2 = new DeliveryAddress();
+            ExpressShipment expShipment = new ExpressShipment("SH-002", "Documents", 1.0, 30m, addr2);
+
+            // f. Create one InternationalShipment
+            DeliveryAddress addr3 = new DeliveryAddress();
+            InternationalShipment intShipment = new InternationalShipment("SH-003", "Gift Box", 5.0, 100m, addr3);
+
+            // g. Add all shipments to the DeliveryCenter
+            center.AddShipment(stdShipment);
+            center.AddShipment(expShipment);
+            center.AddShipment(intShipment);
+
+            // h. Print all shipments using PrintAllShipments()
+            Console.WriteLine("=== Testing PrintAllShipments ===");
+            center.PrintAllShipments();
+
+            // i. Call DeliveryHelper.PrintShipmentDetails() for each shipment
+            Console.WriteLine("\n=== Testing DeliveryHelper ===");
+            DeliveryHelper.PrintShipmentDetails(stdShipment);
+            Console.WriteLine("----------------------------------");
+            DeliveryHelper.PrintShipmentDetails(expShipment);
+            Console.WriteLine("----------------------------------");
+            DeliveryHelper.PrintShipmentDetails(intShipment);
+
+            // j. Demonstrate both versions of UpdateWeight()
+            Console.WriteLine("\n=== Testing UpdateWeight Overloads ===");
+            stdShipment.UpdateWeight(3.0); // Version 1: double (kg)
+            stdShipment.UpdateWeight(500); // Version 2: int (grams)
+
+            // k. Build a Shipment[] holding mixed types and print all of them in a loop
+            Console.WriteLine("\n=== Testing Polymorphic Array Loop ===");
+            Shipment[] mixedShipments = new Shipment[]
+            {
+              stdShipment,
+              expShipment,
+              intShipment
+            };
+
+            foreach (Shipment s in mixedShipments)
+            {
+                s.PrintShipment();
+                Console.WriteLine("----------------------------------");
+            }
+            #endregion
 
         }
     }
